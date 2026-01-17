@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dataset Details</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f7fa;
+      padding: 30px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    .meta {
+      margin: 10px 0 20px;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-right: 10px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      background: #e3f2fd;
+      color: #0d47a1;
+      font-size: 13px;
+    }
+
+    .description {
+      font-size: 15px;
+      margin-bottom: 25px;
+    }
+
+    .downloads a {
+      display: inline-block;
+      margin-right: 12px;
+      margin-bottom: 10px;
+      padding: 10px 14px;
+      background: #0d47a1;
+      color: #ffffff;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .downloads a:hover {
+      background: #1565c0;
+    }
+
+    .back-link {
+      margin-top: 30px;
+      display: inline-block;
+      color: #0d47a1;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .error {
+      color: #b00020;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="content">
+    Loading dataset...
+  </div>
+
+  <!-- Load dataset metadata -->
+  <script src="data.js"></script>
+
+  <script>
+    const content = document.getElementById("content");
+
+    // Step 1: Read dataset ID from URL
+    const params = new URLSearchParams(window.location.search);
+    const datasetId = params.get("id");
+
+    // Step 2: Find dataset object
+    const dataset = datasets.find(ds => ds.id === datasetId);
+
+    // Step 3: Render dataset or error
+    if (!dataset) {
+      content.innerHTML = `
+        <p class="error">Dataset not found.</p>
+        <a class="back-link" href="index.html">← Back to Home</a>
+      `;
+    } else {
+
+      let linksHTML = "";
+
+      if (dataset.files?.full) {
+        linksHTML += `<a href="${dataset.files.full}" target="_blank">Full CSV</a>`;
+      }
+      if (dataset.files?.train) {
+        linksHTML += `<a href="${dataset.files.train}" target="_blank">Train CSV</a>`;
+      }
+      if (dataset.files?.test) {
+        linksHTML += `<a href="${dataset.files.test}" target="_blank">Test CSV</a>`;
+      }
+
+      content.innerHTML = `
+        <h1>${dataset.name}</h1>
+
+        <div class="meta">
+          <span class="tag">${dataset.type}</span>
+          <span class="tag">${dataset.quality}</span>
+        </div>
+
+        <p class="description">${dataset.description}</p>
+
+        <div class="downloads">
+          ${linksHTML}
+        </div>
+
+        <a class="back-link" href="index1.html">← Back to Home</a>
+      `;
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI & DS Dataset Repository</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f7fa;
+      display: flex;
+      height: 100vh;
+    }
+
+    /* Left navigation */
+    .sidebar {
+      width: 240px;
+      background: #0d47a1;
+      color: #fff;
+      padding: 20px;
+    }
+
+    .sidebar h2 {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .nav-item {
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+
+    .nav-item:hover,
+    .nav-item.active {
+      background: #1565c0;
+    }
+
+    /* Main content */
+    .main {
+      flex: 1;
+      padding: 24px;
+      overflow-y: auto;
+    }
+
+    .page-title {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    /* Cards */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .dataset-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 18px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .dataset-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+    }
+
+    .dataset-card h3 {
+      margin: 0 0 8px 0;
+      font-size: 18px;
+    }
+
+    .dataset-card p {
+      font-size: 14px;
+      color: #444;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 4px 8px;
+      font-size: 12px;
+      border-radius: 4px;
+      background: #e3f2fd;
+      color: #0d47a1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LEFT NAVIGATION -->
+  <div class="sidebar">
+    <h2>Datasets</h2>
+    <div class="nav-item active" onclick="loadCategory('classification', this)">
+      Classification
+    </div>
+    <div class="nav-item" onclick="loadCategory('regression', this)">
+      Regression
+    </div>
+    <div class="nav-item" onclick="loadCategory('clustering', this)">
+      Clustering
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main">
+    <div class="page-title" id="pageTitle">Classification Datasets</div>
+    <div class="card-grid" id="cardGrid"></div>
+  </div>
+
+  <!-- DATA + LOGIC -->
+  <script src="data.js"></script>
+  <script>
+    const cardGrid = document.getElementById("cardGrid");
+    const pageTitle = document.getElementById("pageTitle");
+
+    function loadCategory(type, element) {
+      // Update active nav
+      document.querySelectorAll(".nav-item").forEach(item =>
+        item.classList.remove("active")
+      );
+      element.classList.add("active");
+
+      pageTitle.textContent =
+        type.charAt(0).toUpperCase() + type.slice(1) + " Datasets";
+
+      cardGrid.innerHTML = "";
+
+      datasets
+        .filter(ds => ds.type === type)
+        .forEach(ds => {
+          const card = document.createElement("div");
+          card.className = "dataset-card";
+
+          card.onclick = () => {
+            window.location.href = `dataset.html?id=${ds.id || ds.name}`;
+          };
+
+          card.innerHTML = `
+            <h3>${ds.name}</h3>
+            <p>${ds.description}</p>
+            <span class="tag">${ds.quality}</span>
+          `;
+
+          cardGrid.appendChild(card);
+        });
+    }
+
+    // Default load
+    loadCategory("classification", document.querySelector(".nav-item"));
+  </script>
+
+</body>
+</html>
