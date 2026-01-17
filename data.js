@@ -42,11 +42,39 @@ const datasets = [
     quality: "Unsupervised",
     description: "Synthetic dataset for clustering algorithms.",
     files: {
-      full: "https://rvscedgl-ai-ds.github.io/AI-DS-Academic-Data-Repository/datasets/clustering/AMLB_Academic_Cluster.csv"
+      full: "https://rvscedgl-ai-ds.github.io/AI-DS-Academic-Data-Repository/datasets/clustering/AMLB_Academic_cluster.csv"
     }
+  },
+  {
+  id: "amlb-student-regression-clean",
+  name: "AMLB Student Performance (Clean)",
+  type: "regression",
+  quality: "Clean",
+  description: "Clean regression dataset for predicting student exam scores.",
+  files: {
+	  full: "https://rvscedgl-ai-ds.github.io/AI-DS-Academic-Data-Repository/datasets/regression/AMLB_Student_Regression_full.csv",
+      train: "https://rvscedgl-ai-ds.github.io/AI-DS-Academic-Data-Repository/datasets/regression/AMLB_Student_Regression_train.csv",
+      test: "https://rvscedgl-ai-ds.github.io/AI-DS-Academic-Data-Repository/datasets/regression/AMLB_Student_Regression_test.csv"
+    
   }
+},
+{
+  id: "amlb-student-regression-missing",
+  name: "AMLB Student Performance (Missing Values)",
+  type: "regression",
+  quality: "Missing Values",
+  description: "Regression dataset with controlled missing values.",
+  files: {}
+},
+{
+  id: "amlb-student-regression-outliers",
+  name: "AMLB Student Performance (Outliers)",
+  type: "regression",
+  quality: "Outliers",
+  description: "Regression dataset with realistic outliers for robustness testing.",
+  files: {}
+}
+
 ];
-
-
 
 
