@@ -64,7 +64,12 @@ const datasets = [
   type: "regression",
   quality: "Missing Values",
   description: "Regression dataset with controlled missing values.",
-  files: {}
+  files: {
+	  full: "https://rvscedgl-ai-ds.github.io/AI-DS-Academic-Data-Repository/datasets/regression/reg-missing/AMLB_Student_Regression_Missing_full.csv",
+      train: "https://rvscedgl-ai-ds.github.io/AI-DS-Academic-Data-Repository/datasets/regression/reg-missing/AMLB_Student_Regression_Missing_train.csv",
+      test: "https://rvscedgl-ai-ds.github.io/AI-DS-Academic-Data-Repository/datasets/regression/reg-missing/AMLB_Student_Regression_Missing_test.csv"
+  
+  }
 },
 {
   id: "amlb-student-regression-outliers",
@@ -74,7 +79,7 @@ const datasets = [
   description: "Regression dataset with realistic outliers for robustness testing.",
   files: {
 	   full: "https://rvscedgl-ai-ds.github.io/AI-DS-Academic-Data-Repository/datasets/regression/reg-outliers/AMLB_Student_Regression_Outliers_full.csv",
-      train: "https://rvscedgl-ai-ds.github.io/AI-DS-Academic-Data-Repository/datasets/regression/reg-outliers/AMLB_Student_Regression_Outliers_test.csv",
+      train: "https://rvscedgl-ai-ds.github.io/AI-DS-Academic-Data-Repository/datasets/regression/reg-outliers/AMLB_Student_Regression_Outliers_train.csv",
       test: "https://rvscedgl-ai-ds.github.io/AI-DS-Academic-Data-Repository/datasets/regression/reg-outliers/AMLB_Student_Regression_Outliers_test.csv"
   }
 }
