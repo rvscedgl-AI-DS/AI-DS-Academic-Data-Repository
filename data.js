@@ -30,9 +30,9 @@ const datasets = [
     quality: "Outliers",
     description: "Dataset with injected outliers.",
     files: {
-      full: "datasets/classification/AMLB-Outliers/full_outliers.csv",
-      train: "datasets/classification/AMLB-Outliers/train_outliers.csv",
-      test: "datasets/classification/AMLB-Outliers/test_outliers.csv"
+      full: "https://rvscedgl-ai-ds.github.io/AI-DS-Academic-Data-Repository/datasets/classification/AMLB-Student-Performance-Outliers/AMLB_Student_Performance_Outliers_full.csv",
+      train: "https://rvscedgl-ai-ds.github.io/AI-DS-Academic-Data-Repository/datasets/classification/AMLB-Student-Performance-Outliers/AMLB_Student_Performance_Outliers_train.csv",
+      test: "https://rvscedgl-ai-ds.github.io/AI-DS-Academic-Data-Repository/datasets/classification/AMLB-Student-Performance-Outliers/AMLB_Student_Performance_Outliers_test.csv"
     }
   },
   {
