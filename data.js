@@ -72,7 +72,11 @@ const datasets = [
   type: "regression",
   quality: "Outliers",
   description: "Regression dataset with realistic outliers for robustness testing.",
-  files: {}
+  files: {
+	   full: "https://rvscedgl-ai-ds.github.io/AI-DS-Academic-Data-Repository/datasets/regression/reg-outliers/AMLB_Student_Regression_Outliers_full.csv",
+      train: "https://rvscedgl-ai-ds.github.io/AI-DS-Academic-Data-Repository/datasets/regression/reg-outliers/AMLB_Student_Regression_Outliers_test.csv",
+      test: "https://rvscedgl-ai-ds.github.io/AI-DS-Academic-Data-Repository/datasets/regression/reg-outliers/AMLB_Student_Regression_Outliers_test.csv"
+  }
 }
 
 ];
