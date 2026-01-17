@@ -42,9 +42,10 @@ const datasets = [
     quality: "Unsupervised",
     description: "Synthetic dataset for clustering algorithms.",
     files: {
-      full: "https://rvscedgl-ai-ds.github.io/AI-DS-Academic-Data-Repository/datasets/clustering/AMLB_Academic_cluster.csv"
+      full: "https://rvscedgl-ai-ds.github.io/AI-DS-Academic-Data-Repository/datasets/clustering/AMLB_Academic_Cluster.csv"
     }
   }
 ];
+
 
 
