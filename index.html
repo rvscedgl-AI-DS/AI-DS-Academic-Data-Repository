@@ -6,20 +6,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
       background: #f5f7fa;
-      display: flex;
-      height: 100vh;
     }
 
-    /* Left navigation */
+    /* ================= HEADER ================= */
+    .header {
+      background: #0d47a1;
+      color: #fff;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .college-logo {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+
+    .title-text h1 {
+      margin: 0;
+      font-size: 17px;
+    }
+
+    .title-text h2 {
+      margin: 0;
+      font-size: 13px;
+      font-weight: normal;
+      opacity: 0.9;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    /* ================= LAYOUT ================= */
+    .container {
+      display: flex;
+      min-height: calc(100vh - 120px);
+    }
+
+    /* ================= SIDEBAR ================= */
     .sidebar {
       width: 240px;
       background: #0d47a1;
       color: #fff;
       padding: 20px;
+      transition: transform 0.3s ease;
     }
 
     .sidebar h2 {
@@ -39,7 +86,7 @@
       background: #1565c0;
     }
 
-    /* Main content */
+    /* ================= MAIN ================= */
     .main {
       flex: 1;
       padding: 24px;
@@ -51,7 +98,6 @@
       margin-bottom: 20px;
     }
 
-    /* Cards */
     .card-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -73,7 +119,7 @@
     }
 
     .dataset-card h3 {
-      margin: 0 0 8px 0;
+      margin: 0 0 8px;
       font-size: 18px;
     }
 
@@ -91,71 +137,182 @@
       background: #e3f2fd;
       color: #0d47a1;
     }
+
+    /* ================= FOOTER ================= */
+    .footer {
+      background: #0d47a1;
+      color: #fff;
+      text-align: center;
+      padding: 14px;
+      font-size: 13px;
+    }
+
+    /* ================= MOBILE ================= */
+    @media (max-width: 768px) {
+      .hamburger { display: block; }
+
+      .sidebar {
+        position: fixed;
+        top: 64px;
+        left: 0;
+        height: 100%;
+        transform: translateX(-100%);
+        z-index: 1000;
+      }
+
+      .sidebar.show {
+        transform: translateX(0);
+      }
+
+      .main {
+        padding: 16px;
+      }
+
+      .college-logo {
+        width: 28px;
+        height: 28px;
+      }
+
+      .title-text h1 { font-size: 15px; }
+      .title-text h2 { font-size: 12px; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- LEFT NAVIGATION -->
-  <div class="sidebar">
+<!-- ================= HEADER ================= -->
+<div class="header">
+  <div class="header-title">
+    <img src="logo.jpg" alt="RVS Logo" class="college-logo">
+    <div class="title-text">
+      <h1>RVS College of Engineering, Dindigul</h1>
+      <h2>Department of Artificial Intelligence & Data Science</h2>
+    </div>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()">☰</div>
+</div>
+
+<!-- ================= CONTENT ================= -->
+<div class="container">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar" id="sidebar">
     <h2>Datasets</h2>
-    <div class="nav-item active" onclick="loadCategory('classification', this)">
-      Classification
-    </div>
-    <div class="nav-item" onclick="loadCategory('regression', this)">
-      Regression
-    </div>
-    <div class="nav-item" onclick="loadCategory('clustering', this)">
-      Clustering
-    </div>
+
+    <div class="nav-item active" onclick="loadGeneral(this)">General</div>
+    <div class="nav-item" onclick="loadCategory('classification', this)">Classification</div>
+    <div class="nav-item" onclick="loadCategory('regression', this)">Regression</div>
+    <div class="nav-item" onclick="loadCategory('clustering', this)">Clustering</div>
   </div>
 
-  <!-- MAIN CONTENT -->
+  <!-- MAIN -->
   <div class="main">
-    <div class="page-title" id="pageTitle">Classification Datasets</div>
-    <div class="card-grid" id="cardGrid"></div>
+    <div id="generalContent">
+      <div class="page-title">Dataset Repository Overview</div>
+
+      <div class="dataset-card" style="cursor:default;">
+        <h3>Purpose of This Repository</h3>
+        <p>
+          This repository provides curated datasets for learning and teaching
+          classification, regression, and clustering models, with special focus
+          on missing values and outlier handling.
+        </p>
+      </div>
+
+      <br>
+
+      <div class="card-grid">
+        <div class="dataset-card" style="cursor:default;">
+          <h3>Multi-Model Datasets</h3>
+          <p>Datasets usable across classification, regression and clustering.</p>
+          <span class="tag">All Models</span>
+        </div>
+
+        <div class="dataset-card" style="cursor:default;">
+          <h3>Missing Value Datasets</h3>
+          <p>Datasets designed to teach imputation techniques.</p>
+          <span class="tag">Preprocessing</span>
+        </div>
+
+        <div class="dataset-card" style="cursor:default;">
+          <h3>Outlier & Noisy Datasets</h3>
+          <p>Datasets for demonstrating outlier detection methods.</p>
+          <span class="tag">Data Quality</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-title" id="pageTitle" style="display:none;"></div>
+    <div class="card-grid" id="cardGrid" style="display:none;"></div>
   </div>
 
-  <!-- DATA + LOGIC -->
-  <script src="data.js"></script>
-  <script>
-    const cardGrid = document.getElementById("cardGrid");
-    const pageTitle = document.getElementById("pageTitle");
+</div>
 
-    function loadCategory(type, element) {
-      // Update active nav
-      document.querySelectorAll(".nav-item").forEach(item =>
-        item.classList.remove("active")
-      );
-      element.classList.add("active");
+<!-- ================= FOOTER ================= -->
+<div class="footer">
+  © 2026 RVS College of Engineering, Dindigul |
+  Department of Artificial Intelligence & Data Science
+</div>
 
-      pageTitle.textContent =
-        type.charAt(0).toUpperCase() + type.slice(1) + " Datasets";
+<!-- ================= SCRIPT ================= -->
+<script src="data.js"></script>
+<script>
+  const sidebar = document.getElementById("sidebar");
+  const generalContent = document.getElementById("generalContent");
+  const cardGrid = document.getElementById("cardGrid");
+  const pageTitle = document.getElementById("pageTitle");
 
-      cardGrid.innerHTML = "";
+  function toggleMenu() {
+    sidebar.classList.toggle("show");
+  }
 
-      datasets
-        .filter(ds => ds.type === type)
-        .forEach(ds => {
-          const card = document.createElement("div");
-          card.className = "dataset-card";
+  function loadGeneral(element) {
+    document.querySelectorAll(".nav-item").forEach(i => i.classList.remove("active"));
+    element.classList.add("active");
 
-          card.onclick = () => {
-            window.location.href = `dataset.html?id=${ds.id || ds.name}`;
-          };
+    generalContent.style.display = "block";
+    cardGrid.style.display = "none";
+    pageTitle.style.display = "none";
 
-          card.innerHTML = `
-            <h3>${ds.name}</h3>
-            <p>${ds.description}</p>
-            <span class="tag">${ds.quality}</span>
-          `;
+    sidebar.classList.remove("show");
+  }
 
-          cardGrid.appendChild(card);
-        });
-    }
+  function loadCategory(type, element) {
+    document.querySelectorAll(".nav-item").forEach(i => i.classList.remove("active"));
+    element.classList.add("active");
 
-    // Default load
-    loadCategory("classification", document.querySelector(".nav-item"));
-  </script>
+    generalContent.style.display = "none";
+    cardGrid.style.display = "grid";
+    pageTitle.style.display = "block";
+
+    pageTitle.textContent =
+      type.charAt(0).toUpperCase() + type.slice(1) + " Datasets";
+
+    cardGrid.innerHTML = "";
+
+    datasets
+      .filter(ds => ds.type === type)
+      .forEach(ds => {
+        const card = document.createElement("div");
+        card.className = "dataset-card";
+        card.style.cursor = "pointer";
+
+        card.onclick = () => {
+          window.location.href = `dataset.html?id=${ds.id || ds.name}`;
+        };
+
+        card.innerHTML = `
+          <h3>${ds.name}</h3>
+          <p>${ds.description}</p>
+          <span class="tag">${ds.quality}</span>
+        `;
+
+        cardGrid.appendChild(card);
+      });
+
+    sidebar.classList.remove("show");
+  }
+</script>
 
 </body>
 </html>
